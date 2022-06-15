@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import StarWarsContext from './StartWarsContext';
 
 function Provider({ children }) {
-  const [stateA, setStateA] = useState('initialStateA');
-  const [stateB, setStateB] = useState('initialStateB');
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        const promise = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
+        const { results } = await promise.json();
+        setData(results);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchApi();
+  }, []);
+
   const contextValue = {
-    stateA,
-    setStateA,
-    stateB,
-    setStateB,
+    data,
+    setData,
   };
 
   return (
