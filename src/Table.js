@@ -4,7 +4,7 @@ import StarWarsContext from './StartWarsContext';
 import './Table.css';
 
 function Table() {
-  const { data } = useContext(StarWarsContext);
+  const { filteredPlanets } = useContext(StarWarsContext);
 
   return (
     <table>
@@ -26,7 +26,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {data.map((categories) => (
+        {filteredPlanets.map((categories) => (
           <tr key={ uuid() }>
             <td>{categories.name}</td>
             <td>{categories.rotation_period}</td>
